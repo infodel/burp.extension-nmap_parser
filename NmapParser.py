@@ -260,7 +260,7 @@ class NMAPContentHandler(xml.sax.ContentHandler):
         if name == "hostname" and self._state:
             hname = attrs.getValue("name")
             if attrs.getValue("type") == "user":
-                self._hostName = hname
+                self._hostname = hname
         if name == "port" and self._state:
             if attrs.getValue("protocol") == "tcp":
                 self._portid = attrs.getValue("portid")
@@ -276,9 +276,9 @@ class NMAPContentHandler(xml.sax.ContentHandler):
                 
         if name == 'port':
             #print "end port"
-            if self._hostName is not None and self._useHostname:
-                if [self._hostName, self._portid, self._servicename] not in self._list:
-                    self._list.append([self._hostName, self._portid, self._servicename])
+            if self._hostname is not None and self._useHostname:
+                if [self._hostname, self._portid, self._servicename] not in self._list:
+                    self._list.append([self._hostname, self._portid, self._servicename])
             else:
                 if [self._addr, self._portid, self._servicename] not in self._list:
                     self._list.append([self._addr, self._portid, self._servicename])
